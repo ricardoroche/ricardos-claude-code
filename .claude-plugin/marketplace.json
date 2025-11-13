@@ -1,0 +1,21 @@
+{
+  "name": "ricardos-claude-code",
+  "owner": {
+    "name": "Ricardo Roche",
+    "contact": "github.com/ricardoroche"
+  },
+  "description": "Ricardo's curated Claude Code setup for Python AI engineering",
+  "plugins": [
+    {
+      "name": "ricardos-claude-code",
+      "source": "./",
+      "description": "Personal Claude Code configuration for Python AI engineering with 5 commands, 8 agents, and 8 pattern skills",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ricardo Roche",
+        "email": "[email protected]"
+      },
+      "tags": ["python", "ai-engineering", "fastapi", "pytest", "productivity", "development"]
+    }
+  ]
+}

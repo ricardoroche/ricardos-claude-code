@@ -1,0 +1,264 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit:*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-commit-gate.sh",
+            "timeout": 120,
+            "errorMessage": "Quality gate failed - run /fix to auto-fix, then /check to validate. Or use CLAUDE_SKIP_CHECKS=1 for quick commits."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$(date -Iseconds) | ${CLAUDE_TOOL_NAME:-unknown} | ${CLAUDE_FILE_PATH:-N/A}\" >> .claude/logs/activity.log || true",
+            "timeout": 1,
+            "silent": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.py) | Edit(*.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/auto-format.sh \"${CLAUDE_FILE_PATH}\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit(pyproject.toml) | Edit(requirements.txt) | Edit(setup.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/sync-dependencies.sh",
+            "timeout": 60
+          }
+        ]
+      },
+      {
+        "matcher": "Write(tests/**/*.py) | Edit(tests/**/*.py) | Write(test_*.py) | Edit(test_*.py)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/auto-test.sh \"${CLAUDE_FILE_PATH}\"",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "comment": "Auto-approve ONLY safe, read-only operations for efficiency. All state-modifying operations require explicit approval.",
+    "autoApprove": {
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "mcp__filesystem__read_file",
+        "mcp__filesystem__read_text_file",
+        "mcp__filesystem__read_media_file",
+        "mcp__filesystem__read_multiple_files",
+        "mcp__filesystem__list_directory",
+        "mcp__filesystem__list_directory_with_sizes",
+        "mcp__filesystem__directory_tree",
+        "mcp__filesystem__get_file_info",
+        "mcp__filesystem__search_files",
+        "mcp__filesystem__list_allowed_directories"
+      ],
+      "mcpServers": {
+        "memory": {
+          "autoApprove": [
+            "list_entities",
+            "search_nodes",
+            "read_graph"
+          ],
+          "requireApproval": [
+            "create_entities",
+            "create_relations",
+            "delete_entities",
+            "delete_relations",
+            "open_nodes"
+          ]
+        },
+        "serena": {
+          "comment": "Serena is read-only semantic search - safe to auto-approve all operations",
+          "autoApprove": ["*"]
+        },
+        "context7": {
+          "comment": "Context7 is read-only documentation access - safe to auto-approve",
+          "autoApprove": ["*"]
+        },
+        "duckdb-operational": {
+          "autoApprove": [
+            "list_tables",
+            "describe_table",
+            "query"
+          ],
+          "requireApproval": [
+            "execute",
+            "append_csv"
+          ]
+        },
+        "duckdb-analytics": {
+          "autoApprove": [
+            "list_tables",
+            "describe_table",
+            "query"
+          ],
+          "requireApproval": [
+            "execute",
+            "append_csv"
+          ]
+        },
+        "linear": {
+          "autoApprove": [
+            "list_issues",
+            "search_issues",
+            "get_issue"
+          ],
+          "requireApproval": [
+            "create_issue",
+            "update_issue",
+            "create_comment"
+          ]
+        },
+        "notion": {
+          "autoApprove": [
+            "search_pages",
+            "read_page"
+          ],
+          "requireApproval": [
+            "create_page",
+            "update_page",
+            "append_block"
+          ]
+        }
+      },
+      "bashCommands": [
+        "ls",
+        "ls *",
+        "pwd",
+        "wc",
+        "wc *",
+        "which",
+        "which *",
+        "git status",
+        "git log",
+        "git log *",
+        "git diff",
+        "git diff *",
+        "git branch",
+        "git branch *",
+        "ruff check",
+        "ruff check *",
+        "ruff format --check",
+        "ruff format --check *",
+        "mypy",
+        "mypy *",
+        "pytest",
+        "pytest *",
+        "python --version",
+        "python -m pytest",
+        "uv --version"
+      ]
+    },
+    "requireApproval": {
+      "comment": "ALL state-modifying operations MUST be approved. This includes file modifications, git operations, package installations, and database writes.",
+      "tools": [
+        "Write",
+        "Edit",
+        "Bash",
+        "NotebookEdit",
+        "mcp__filesystem__write_file",
+        "mcp__filesystem__edit_file",
+        "mcp__filesystem__move_file",
+        "mcp__filesystem__create_directory"
+      ],
+      "dangerousCommands": {
+        "comment": "These commands are NEVER auto-approved and should show strong warnings",
+        "alwaysRequireApproval": [
+          "rm",
+          "rm *",
+          "rm -f",
+          "rm -rf",
+          "rm -r",
+          "sudo",
+          "sudo *"
+        ]
+      },
+      "criticalBashCommands": [
+        "mv",
+        "mv *",
+        "cp",
+        "cp *",
+        "git commit",
+        "git commit *",
+        "git push",
+        "git push *",
+        "git checkout",
+        "git checkout *",
+        "git merge",
+        "git merge *",
+        "git rebase",
+        "git rebase *",
+        "git reset",
+        "git reset *",
+        "pip install",
+        "pip install *",
+        "uv add",
+        "uv add *",
+        "npm install",
+        "npm install *",
+        "curl",
+        "curl *",
+        "wget",
+        "wget *",
+        "ruff format",
+        "ruff format *",
+        "python",
+        "python *"
+      ]
+    },
+    "yoloMode": {
+      "comment": "Additional auto-approvals when CLAUDE_YOLO_MODE=1 - for rapid iteration on non-production code. Use with caution!",
+      "autoApprove": [
+        "Write(tests/**/*.py)",
+        "Edit(tests/**/*.py)",
+        "Bash(git add *)",
+        "Bash(ruff format *)",
+        "Bash(python -m pytest *)",
+        "Bash(rm *)",
+        "Bash(rm -f *)",
+        "Bash(rm -rf *)",
+        "Bash(rm -r *)"
+      ],
+      "stillRequireApproval": {
+        "comment": "Even in YOLO mode, these operations require approval for safety",
+        "alwaysRequireApproval": [
+          "git push",
+          "git push *",
+          "git push --force",
+          "sudo",
+          "sudo *"
+        ]
+      }
+    }
+  },
+  "env": {
+    "PYTHONPATH": "src:.",
+    "PYTEST_TIMEOUT": "30",
+    "CLAUDE_YOLO_MODE": "0",
+    "CLAUDE_SKIP_CHECKS": "0"
+  }
+}
