@@ -7,32 +7,32 @@
   },
   "license": "MIT",
   "commands": [
-    ".claude/commands/primer.md",
-    ".claude/commands/fix.md",
-    ".claude/commands/api.md",
-    ".claude/commands/lint.md",
-    ".claude/commands/check.md",
-    ".claude/commands/test.md"
+    "./.claude/commands/primer.md",
+    "./.claude/commands/fix.md",
+    "./.claude/commands/api.md",
+    "./.claude/commands/lint.md",
+    "./.claude/commands/check.md",
+    "./.claude/commands/test.md"
   ],
   "agents": [
-    ".claude/agents/code-reviewer.md",
-    ".claude/agents/write-unit-tests.md",
-    ".claude/agents/debug-test-failure.md",
-    ".claude/agents/fix-pr-comments.md",
-    ".claude/agents/implement-feature.md",
-    ".claude/agents/add-agent-tool.md",
-    ".claude/agents/upgrade-dependency.md",
-    ".claude/agents/optimize-db-query.md"
+    "./.claude/agents/code-reviewer.md",
+    "./.claude/agents/write-unit-tests.md",
+    "./.claude/agents/debug-test-failure.md",
+    "./.claude/agents/fix-pr-comments.md",
+    "./.claude/agents/implement-feature.md",
+    "./.claude/agents/add-agent-tool.md",
+    "./.claude/agents/upgrade-dependency.md",
+    "./.claude/agents/optimize-db-query.md"
   ],
   "skills": [
-    ".claude/skills/dynaconf-config.md",
-    ".claude/skills/async-await-checker.md",
-    ".claude/skills/structured-errors.md",
-    ".claude/skills/pydantic-models.md",
-    ".claude/skills/tool-design-pattern.md",
-    ".claude/skills/docstring-format.md",
-    ".claude/skills/pii-redaction.md",
-    ".claude/skills/pytest-patterns.md"
+    "./.claude/skills/dynaconf-config.md",
+    "./.claude/skills/async-await-checker.md",
+    "./.claude/skills/structured-errors.md",
+    "./.claude/skills/pydantic-models.md",
+    "./.claude/skills/tool-design-pattern.md",
+    "./.claude/skills/docstring-format.md",
+    "./.claude/skills/pii-redaction.md",
+    "./.claude/skills/pytest-patterns.md"
   ],
   "mcpServers": {
     "memory": {
