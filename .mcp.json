@@ -8,30 +8,12 @@
     "serena": {
       "command": "uvx",
       "args": ["--from", "git+https://github.com/oraios/serena", "serena-mcp-server"],
-      "description": "Semantic code retrieval - understands code structure at symbol level (functions, classes, variables), multi-language support, efficient code search"
+      "description": "Semantic code retrieval - understands code structure at symbol level (functions, classes, variables), powers /primer command"
     },
     "context7": {
       "command": "npx",
       "args": ["-y", "context7-mcp"],
-      "description": "Access up-to-date documentation for any library - Python packages, FastAPI, Pydantic, pytest, and more"
-    },
-    "duckdb-operational": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-duckdb",
-        "--db-path",
-        "data/operational.db"
-      ],
-      "description": "Query operational database - application data, user records, transactions, operational metrics"
-    },
-    "duckdb-analytics": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-duckdb",
-        "--db-path",
-        "data/analytics.db"
-      ],
-      "description": "Query analytics database - performance metrics, usage statistics, business intelligence data"
+      "description": "Up-to-date documentation for any library - Python packages, FastAPI, Pydantic, pytest, and more"
     },
     "linear": {
       "command": "npx",

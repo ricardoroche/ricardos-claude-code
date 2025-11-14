@@ -54,17 +54,17 @@ Reusable patterns for consistent code quality:
 - **pii-redaction** - PII handling patterns
 - **pytest-patterns** - Testing best practices
 
-### 🔌 MCP Servers (7)
+### 🔌 MCP Servers (5 Universal)
 
-Pre-configured Model Context Protocol servers:
+Pre-configured Model Context Protocol servers that work across all projects:
 
-- **serena** - Semantic code retrieval with symbol-level understanding (powers /primer)
 - **memory** - Persistent context across sessions
+- **serena** - Semantic code retrieval with symbol-level understanding (powers /primer)
 - **context7** - Up-to-date library documentation
-- **duckdb-operational** - Operational database access
-- **duckdb-analytics** - Analytics database access
 - **linear** - Issue tracking integration
 - **notion** - Documentation workspace integration
+
+**Note**: DuckDB servers are project-specific and must be configured in each project's `.mcp.json` with the correct database paths. See project-level configuration for examples.
 
 ### ⚡ Automated Quality Gates
 
@@ -193,24 +193,92 @@ After installation, MCP servers are pre-configured in `.mcp.json`. The setup inc
 - **serena** - Semantic code retrieval (powers /primer command)
 - **context7** - Up-to-date library documentation
 
-**Database Servers** (auto-configured for local DuckDB):
-- **duckdb-operational** - Operational database at `data/operational.db`
-- **duckdb-analytics** - Analytics database at `data/analytics.db`
-
 **Integration Servers** (require authentication on first use):
 - **linear** - Linear issue tracking via SSE endpoint
 - **notion** - Notion workspace via OAuth
 
+**Project-Specific Servers**:
+- **DuckDB** servers (operational/analytics) must be configured in each project's `.mcp.json` with project-specific database paths
+- See your project's `.mcp.json` for examples of database configuration
+
 See [docs/workflows/mcp-servers.md](docs/workflows/mcp-servers.md) for detailed configuration instructions.
+
+## Configuration Hierarchy
+
+This plugin provides **universal Python patterns** that work across all projects. Project-specific configuration is managed separately:
+
+### Plugin Level (Universal)
+- **Location**: `~/dev/personal/ricardos-claude-code/`
+- **Purpose**: Generic Python development patterns, agents, commands
+- **What's Here**: Hooks, auto-approve for read-only tools, universal env vars
+- **Shared**: Not project-specific, works everywhere
+
+### Project Level (Team)
+- **Location**: `project/.claude/` (checked into git)
+- **Purpose**: Project-specific agents, commands, skills
+- **What's Here**: Project conventions, team workflows, service-specific config
+- **Shared**: Yes, with entire team
+
+### Personal Level (You)
+- **Location**: `project/.claude/*.local.*` (gitignored)
+- **Purpose**: Your personal dev preferences and permissions
+- **What's Here**: Auto-approve overrides, dev workflows, personal notes
+- **Shared**: No, personal only
+
+### Setting Up Personal Config
+
+Create personal configuration files in your project's `.claude/` directory:
+
+**`settings.local.json`** - Personal permission overrides:
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(make test:*)",
+      "mcp__linear__list_issues"
+    ]
+  }
+}
+```
+
+**`CLAUDE.local.md`** - Personal dev preferences:
+```markdown
+# My Personal Dev Preferences
+
+## Development Environment
+- **Editor**: VS Code / Neovim
+- **Shell**: Fish / Zsh
+- **Workflows**: Always use make commands
+
+## Personal Notes
+- Project-specific reminders
+```
+
+These files are automatically gitignored and won't be shared with your team.
+
+### Validation
+
+Use the `/config-status` command (if available in your project) to see the complete merged configuration from all levels.
 
 ## Customization
 
-After installation, customize:
+You can customize at any level:
 
-- Commands: Edit files in `.claude/commands/`
-- Agents: Edit files in `.claude/agents/`
-- Skills: Edit files in `.claude/skills/`
-- Hooks: Modify `.claude/settings.json`
+**Plugin (Universal):**
+- Commands: Edit files in `~/dev/personal/ricardos-claude-code/.claude/commands/`
+- Agents: Edit files in `~/dev/personal/ricardos-claude-code/.claude/agents/`
+- Skills: Edit files in `~/dev/personal/ricardos-claude-code/.claude/skills/`
+- Hooks: Modify `~/dev/personal/ricardos-claude-code/.claude/settings.json`
+
+**Project (Team):**
+- Create project-specific agents in `project/.claude/agents/`
+- Create project-specific commands in `project/.claude/commands/`
+- Create project-specific skills in `project/.claude/skills/`
+
+**Personal (You):**
+- Add permissions in `project/.claude/settings.local.json`
+- Add preferences in `project/.claude/CLAUDE.local.md`
 
 ## Contributing
 
