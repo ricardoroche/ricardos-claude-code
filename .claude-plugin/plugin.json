@@ -1,124 +1,38 @@
 {
   "name": "ricardos-claude-code",
   "version": "1.0.0",
-  "description": "Ricardo's personal Claude Code setup for Python AI engineering - 6 commands, 10 specialized agents, 8 pattern skills, and 7 MCP servers",
-  "author": "Ricardo Roche",
+  "description": "Ricardo's personal Claude Code setup for Python AI engineering - 6 commands, 8 specialized agents, 8 pattern skills, and 7 MCP servers",
+  "author": {
+    "name": "Ricardo Roche"
+  },
   "license": "MIT",
   "commands": [
-    {
-      "name": "primer",
-      "path": ".claude/commands/primer.md",
-      "description": "Prime Claude with project context using Serena semantic code retrieval"
-    },
-    {
-      "name": "fix",
-      "path": ".claude/commands/fix.md",
-      "description": "Auto-fix Python issues with ruff, black, and mypy"
-    },
-    {
-      "name": "api",
-      "path": ".claude/commands/api.md",
-      "description": "Create FastAPI endpoint with validation and error handling"
-    },
-    {
-      "name": "lint",
-      "path": ".claude/commands/lint.md",
-      "description": "Run Python linting and type checking"
-    },
-    {
-      "name": "check",
-      "path": ".claude/commands/check.md",
-      "description": "Run quality checks (tests, coverage, types)"
-    },
-    {
-      "name": "test",
-      "path": ".claude/commands/test.md",
-      "description": "Run pytest with appropriate options"
-    }
+    ".claude/commands/primer.md",
+    ".claude/commands/fix.md",
+    ".claude/commands/api.md",
+    ".claude/commands/lint.md",
+    ".claude/commands/check.md",
+    ".claude/commands/test.md"
   ],
   "agents": [
-    {
-      "name": "code-reviewer",
-      "path": ".claude/agents/code-reviewer.md",
-      "description": "Comprehensive Python code review with security analysis, performance optimization, and best practices"
-    },
-    {
-      "name": "write-unit-tests",
-      "path": ".claude/agents/write-unit-tests.md",
-      "description": "Generate pytest-based unit tests with good coverage"
-    },
-    {
-      "name": "debug-test-failure",
-      "path": ".claude/agents/debug-test-failure.md",
-      "description": "Debug and fix failing Python tests"
-    },
-    {
-      "name": "fix-pr-comments",
-      "path": ".claude/agents/fix-pr-comments.md",
-      "description": "Systematically address pull request feedback"
-    },
-    {
-      "name": "implement-feature",
-      "path": ".claude/agents/implement-feature.md",
-      "description": "Implement Python features with FastAPI and Strands patterns"
-    },
-    {
-      "name": "add-agent-tool",
-      "path": ".claude/agents/add-agent-tool.md",
-      "description": "Add tools to AI agents following best design patterns"
-    },
-    {
-      "name": "upgrade-dependency",
-      "path": ".claude/agents/upgrade-dependency.md",
-      "description": "Manage Python dependency upgrades and migrations"
-    },
-    {
-      "name": "optimize-db-query",
-      "path": ".claude/agents/optimize-db-query.md",
-      "description": "Optimize SQL and DuckDB queries for performance"
-    }
+    ".claude/agents/code-reviewer.md",
+    ".claude/agents/write-unit-tests.md",
+    ".claude/agents/debug-test-failure.md",
+    ".claude/agents/fix-pr-comments.md",
+    ".claude/agents/implement-feature.md",
+    ".claude/agents/add-agent-tool.md",
+    ".claude/agents/upgrade-dependency.md",
+    ".claude/agents/optimize-db-query.md"
   ],
   "skills": [
-    {
-      "name": "dynaconf-config",
-      "path": ".claude/skills/dynaconf-config.md",
-      "description": "Configuration management with Dynaconf"
-    },
-    {
-      "name": "async-await-checker",
-      "path": ".claude/skills/async-await-checker.md",
-      "description": "Async/await best practices for Python"
-    },
-    {
-      "name": "structured-errors",
-      "path": ".claude/skills/structured-errors.md",
-      "description": "Consistent error handling patterns"
-    },
-    {
-      "name": "pydantic-models",
-      "path": ".claude/skills/pydantic-models.md",
-      "description": "Pydantic model design and validation"
-    },
-    {
-      "name": "tool-design-pattern",
-      "path": ".claude/skills/tool-design-pattern.md",
-      "description": "AI tool design guidelines and patterns"
-    },
-    {
-      "name": "docstring-format",
-      "path": ".claude/skills/docstring-format.md",
-      "description": "Python docstring standards and formatting"
-    },
-    {
-      "name": "pii-redaction",
-      "path": ".claude/skills/pii-redaction.md",
-      "description": "PII handling and redaction patterns"
-    },
-    {
-      "name": "pytest-patterns",
-      "path": ".claude/skills/pytest-patterns.md",
-      "description": "Pytest testing patterns and best practices"
-    }
+    ".claude/skills/dynaconf-config.md",
+    ".claude/skills/async-await-checker.md",
+    ".claude/skills/structured-errors.md",
+    ".claude/skills/pydantic-models.md",
+    ".claude/skills/tool-design-pattern.md",
+    ".claude/skills/docstring-format.md",
+    ".claude/skills/pii-redaction.md",
+    ".claude/skills/pytest-patterns.md"
   ],
   "mcpServers": {
     "memory": {
@@ -164,15 +78,5 @@
       "args": ["-y", "mcp-remote@latest", "https://mcp.notion.com/mcp"],
       "description": "Notion workspace - search pages, create pages, update documentation (requires: OAuth authentication on first use)"
     }
-  },
-  "tags": [
-    "python",
-    "ai-engineering",
-    "fastapi",
-    "pytest",
-    "productivity",
-    "quality",
-    "mcp",
-    "strands"
-  ]
+  }
 }
