@@ -71,6 +71,7 @@ data/*.duckdb
 .claude/settings.local.json
 CLAUDE.local.md
 .mcp.local.json
+*.local.md
 
 # Claude Code logs and temporary files
 .claude/logs/

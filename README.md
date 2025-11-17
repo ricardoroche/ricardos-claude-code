@@ -1,6 +1,6 @@
 # Ricardo's Claude Code Setup
 
-My personal Claude Code configuration for productive Python AI engineering. This plugin provides **6 slash commands**, **10 specialized AI agents**, **8 Python pattern skills**, and **7 MCP servers** to supercharge your AI development workflow.
+My personal Claude Code configuration for productive Python AI engineering and Data Engineering.
 
 ## Quick Install
 
@@ -14,7 +14,7 @@ My personal Claude Code configuration for productive Python AI engineering. This
 
 ## What's Inside
 
-### 🐍 Python AI Commands (6)
+### Python AI Commands
 
 - `/primer` - Prime Claude with project context using Serena semantic code retrieval
 - `/fix` - Auto-fix Python issues (ruff, black, mypy)
@@ -23,7 +23,7 @@ My personal Claude Code configuration for productive Python AI engineering. This
 - `/check` - Quality checks (tests, coverage, types)
 - `/test` - Run pytest with appropriate options
 
-### 🤖 Specialized AI Agents (10)
+### Specialized AI Agents
 
 **Code Quality & Review**
 
@@ -41,7 +41,7 @@ My personal Claude Code configuration for productive Python AI engineering. This
 - **deep-research-agent** - In-depth research and analysis
 - **technical-writer** - Technical documentation and writing
 
-### 📚 Python Pattern Skills (8)
+### Python Pattern Skills
 
 Reusable patterns for consistent code quality:
 
@@ -54,7 +54,7 @@ Reusable patterns for consistent code quality:
 - **pii-redaction** - PII handling patterns
 - **pytest-patterns** - Testing best practices
 
-### 🔌 MCP Servers (5 Universal)
+### MCP Servers
 
 Pre-configured Model Context Protocol servers that work across all projects:
 
@@ -66,16 +66,18 @@ Pre-configured Model Context Protocol servers that work across all projects:
 
 **Note**: DuckDB servers are project-specific and must be configured in each project's `.mcp.json` with the correct database paths. See project-level configuration for examples.
 
-### ⚡ Automated Quality Gates
+### Automated Quality Gates
 
 Smart automation with external hook scripts:
 
 **Pre-Commit Hooks:**
+
 - Code quality checks (linting, type checking) before commits
 - Test suite validation before commits
 - Dependency security scanning
 
 **Post-Edit Hooks:**
+
 - Auto-format Python files with black/ruff after edits
 - Auto-run pytest when test files are modified
 - Dependency sync when pyproject.toml changes
@@ -142,6 +144,7 @@ cd ricardos-claude-code
 ### Generating Tests
 
 Just ask Claude:
+
 - "Write unit tests for this function"
 - "I need test coverage for this module"
 
@@ -189,15 +192,18 @@ This setup emphasizes:
 After installation, MCP servers are pre-configured in `.mcp.json`. The setup includes:
 
 **Core Servers** (no configuration needed):
+
 - **memory** - Persistent context storage
 - **serena** - Semantic code retrieval (powers /primer command)
 - **context7** - Up-to-date library documentation
 
 **Integration Servers** (require authentication on first use):
+
 - **linear** - Linear issue tracking via SSE endpoint
 - **notion** - Notion workspace via OAuth
 
 **Project-Specific Servers**:
+
 - **DuckDB** servers (operational/analytics) must be configured in each project's `.mcp.json` with project-specific database paths
 - See your project's `.mcp.json` for examples of database configuration
 
@@ -208,18 +214,21 @@ See [docs/workflows/mcp-servers.md](docs/workflows/mcp-servers.md) for detailed 
 This plugin provides **universal Python patterns** that work across all projects. Project-specific configuration is managed separately:
 
 ### Plugin Level (Universal)
+
 - **Location**: `~/dev/personal/ricardos-claude-code/`
 - **Purpose**: Generic Python development patterns, agents, commands
 - **What's Here**: Hooks, auto-approve for read-only tools, universal env vars
 - **Shared**: Not project-specific, works everywhere
 
 ### Project Level (Team)
+
 - **Location**: `project/.claude/` (checked into git)
 - **Purpose**: Project-specific agents, commands, skills
 - **What's Here**: Project conventions, team workflows, service-specific config
 - **Shared**: Yes, with entire team
 
 ### Personal Level (You)
+
 - **Location**: `project/.claude/*.local.*` (gitignored)
 - **Purpose**: Your personal dev preferences and permissions
 - **What's Here**: Auto-approve overrides, dev workflows, personal notes
@@ -230,6 +239,7 @@ This plugin provides **universal Python patterns** that work across all projects
 Create personal configuration files in your project's `.claude/` directory:
 
 **`settings.local.json`** - Personal permission overrides:
+
 ```json
 {
   "permissions": {
@@ -243,15 +253,18 @@ Create personal configuration files in your project's `.claude/` directory:
 ```
 
 **`CLAUDE.local.md`** - Personal dev preferences:
+
 ```markdown
 # My Personal Dev Preferences
 
 ## Development Environment
+
 - **Editor**: VS Code / Neovim
 - **Shell**: Fish / Zsh
 - **Workflows**: Always use make commands
 
 ## Personal Notes
+
 - Project-specific reminders
 ```
 
@@ -266,17 +279,20 @@ Use the `/config-status` command (if available in your project) to see the compl
 You can customize at any level:
 
 **Plugin (Universal):**
+
 - Commands: Edit files in `~/dev/personal/ricardos-claude-code/.claude/commands/`
 - Agents: Edit files in `~/dev/personal/ricardos-claude-code/.claude/agents/`
 - Skills: Edit files in `~/dev/personal/ricardos-claude-code/.claude/skills/`
 - Hooks: Modify `~/dev/personal/ricardos-claude-code/.claude/settings.json`
 
 **Project (Team):**
+
 - Create project-specific agents in `project/.claude/agents/`
 - Create project-specific commands in `project/.claude/commands/`
 - Create project-specific skills in `project/.claude/skills/`
 
 **Personal (You):**
+
 - Add permissions in `project/.claude/settings.local.json`
 - Add preferences in `project/.claude/CLAUDE.local.md`
 
