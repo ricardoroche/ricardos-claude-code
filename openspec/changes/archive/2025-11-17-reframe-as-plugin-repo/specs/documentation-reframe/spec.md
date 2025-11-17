@@ -4,9 +4,11 @@
 
 Reframe README.md and openspec/project.md to accurately describe this as a Claude Code plugin repository for Python AI/data engineering, not as a project using the plugin.
 
-## MODIFIED Requirements
+## ADDED Requirements
 
-### Requirement: README describes plugin installation and usage
+### Requirement: README SHALL describe plugin installation and usage
+
+The README.md file SHALL clearly describe this as a reusable Claude Code plugin and provide installation instructions.
 
 **Rationale:** Users need to understand this is a reusable plugin they can install in any Python project, not a template or example project.
 
@@ -14,31 +16,29 @@ Reframe README.md and openspec/project.md to accurately describe this as a Claud
 
 **Given** a user discovers the ricardos-claude-code repository
 **When** they read the README.md
-**Then** the opening section should clearly state this is a Claude Code plugin
-**And** it should describe what the plugin provides (commands, agents, skills, hooks)
-**And** it should NOT describe it as a specific project or application
+**Then** the opening section MUST clearly state this is a Claude Code plugin
+**And** it MUST describe what the plugin provides (commands, agents, skills, hooks)
+**And** it MUST NOT describe it as a specific project or application
 
 #### Scenario: User wants to install the plugin
 
 **Given** a user wants to use the plugin in their Python project
 **When** they read the installation section
-**Then** they should find clear instructions using `/plugin marketplace add` and `/plugin install`
-**And** the instructions should work for any Python project
-**And** there should be no project-specific setup requirements
+**Then** they MUST find clear instructions using `/plugin marketplace add` and `/plugin install`
+**And** the instructions MUST work for any Python project
+**And** there MUST be no project-specific setup requirements
 
 #### Scenario: Developer wants to contribute to the plugin
 
 **Given** a developer wants to improve the plugin
 **When** they read the contributing section
-**Then** they should understand this is plugin development
-**And** they should know how to test changes locally
-**And** they should understand how to add/modify commands, agents, or skills
+**Then** they MUST understand this is plugin development
+**And** they MUST know how to test changes locally
+**And** they MUST understand how to add/modify commands, agents, or skills
 
-## MODIFIED Requirements
+### Requirement: openspec/project.md SHALL provide plugin development context
 
-### Requirement: openspec/project.md MUST provide plugin development context
-
-The openspec/project.md file MUST describe this repository as a Claude Code plugin development project and provide appropriate context for plugin development.
+The openspec/project.md file SHALL describe this repository as a Claude Code plugin development project and provide appropriate context for plugin development.
 
 **Rationale:** Future AI-assisted work on this repository needs to understand it's developing a plugin, not a project using a plugin.
 
@@ -46,33 +46,31 @@ The openspec/project.md file MUST describe this repository as a Claude Code plug
 
 **Given** an AI agent is working on this repository
 **When** it reads openspec/project.md
-**Then** the "Purpose" section should describe this as a Claude Code plugin repository
-**And** the "Tech Stack" should reflect plugin development tools and patterns
-**And** the "Project Conventions" should cover plugin development best practices
+**Then** the "Purpose" section MUST describe this as a Claude Code plugin repository
+**And** the "Tech Stack" MUST reflect plugin development tools and patterns
+**And** the "Project Conventions" MUST cover plugin development best practices
 
 #### Scenario: AI agent needs to understand the domain
 
 **Given** an AI agent is implementing a new command or agent
 **When** it consults openspec/project.md for domain context
-**Then** it should find guidance on Claude Code plugin structure
-**And** it should find patterns for commands, agents, skills, and hooks
-**And** it should NOT find project-specific application logic
+**Then** it MUST find guidance on Claude Code plugin structure
+**And** it MUST find patterns for commands, agents, skills, and hooks
+**And** it MUST NOT find project-specific application logic
 
-## REMOVED Requirements
+### Requirement: Documentation SHALL NOT describe specific project architecture
 
-### Requirement: Documentation describes specific project architecture
+Documentation SHALL NOT include references to specific project applications, services, credentials, or schemas.
 
 **Rationale:** As a plugin, there is no specific project architecture - the plugin provides reusable components for any Python project.
 
-#### Scenario: Documentation references project-specific setup
+#### Scenario: Documentation references architecture
 
 **Given** documentation files describe repository contents
 **When** they discuss architecture or setup
-**Then** they should NOT reference specific applications or services
-**And** they should NOT include project-specific API keys or credentials
-**And** they should NOT describe specific database schemas or paths
-
-## ADDED Requirements
+**Then** they MUST NOT reference specific applications or services
+**And** they MUST NOT include project-specific API keys or credentials
+**And** they MUST NOT describe specific database schemas or paths
 
 ### Requirement: Documentation SHALL separate plugin guidelines from project usage
 
@@ -84,16 +82,16 @@ Documentation SHALL clearly distinguish between plugin-provided capabilities and
 
 **Given** a user wants to understand the Python patterns this plugin promotes
 **When** they read the documentation
-**Then** patterns should be described as general best practices
-**And** examples should be generic and reusable
-**And** it should be clear these are recommendations, not requirements
+**Then** patterns MUST be described as general best practices
+**And** examples MUST be generic and reusable
+**And** it MUST be clear these are recommendations, not requirements
 
 #### Scenario: User configures the plugin in their project
 
 **Given** a user has installed the plugin
 **When** they want to customize behavior for their project
-**Then** documentation should explain how to override or extend plugin behavior
-**And** it should be clear what's plugin-level vs. project-level configuration
+**Then** documentation MUST explain how to override or extend plugin behavior
+**And** it MUST be clear what's plugin-level vs. project-level configuration
 
 ## Impact
 
