@@ -1,7 +1,7 @@
 {
   "name": "ricardos-claude-code",
   "version": "1.0.0",
-  "description": "Ricardo's personal Claude Code setup for Python AI engineering - 6 commands, 8 specialized agents, 8 pattern skills, and 7 MCP servers",
+  "description": "Claude Code plugin for Python AI/data engineering - 6 commands, 8 specialized agents, 8 pattern skills for productive Python development",
   "author": {
     "name": "Ricardo Roche"
   },
@@ -33,50 +33,5 @@
     "./.claude/skills/docstring-format.md",
     "./.claude/skills/pii-redaction.md",
     "./.claude/skills/pytest-patterns.md"
-  ],
-  "mcpServers": {
-    "memory": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
-      "description": "Persistent memory across Claude Code sessions - stores architecture decisions, API endpoints, common patterns, and project context"
-    },
-    "serena": {
-      "command": "uvx",
-      "args": ["--from", "git+https://github.com/oraios/serena", "serena-mcp-server"],
-      "description": "Semantic code retrieval - understands code structure at symbol level (functions, classes, variables), multi-language support, efficient code search"
-    },
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "context7-mcp"],
-      "description": "Access up-to-date documentation for any library - Python packages, FastAPI, Pydantic, pytest, and more"
-    },
-    "duckdb-operational": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-duckdb",
-        "--db-path",
-        "data/operational.db"
-      ],
-      "description": "Query operational database - application data, user records, transactions, operational metrics"
-    },
-    "duckdb-analytics": {
-      "command": "uvx",
-      "args": [
-        "mcp-server-duckdb",
-        "--db-path",
-        "data/analytics.db"
-      ],
-      "description": "Query analytics database - performance metrics, usage statistics, business intelligence data"
-    },
-    "linear": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.linear.app/sse"],
-      "description": "Linear issue tracking - create issues, update status, link to commits (requires: /mcp to authenticate)"
-    },
-    "notion": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.notion.com/mcp"],
-      "description": "Notion workspace - search pages, create pages, update documentation (requires: OAuth authentication on first use)"
-    }
-  }
+  ]
 }

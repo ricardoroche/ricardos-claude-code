@@ -1,98 +1,63 @@
-# Ricardo's Claude Code Setup
+# Claude Code Plugin for Python AI/Data Engineering
 
-My personal Claude Code configuration for productive Python AI engineering and Data Engineering.
+A comprehensive Claude Code plugin providing commands, specialized agents, pattern skills, and automation hooks for productive Python development in AI and data engineering projects.
 
-## Quick Install
+## What's Included
 
-```bash
-# Step 1: Add the marketplace
-/plugin marketplace add ricardoroche/ricardos-claude-code
+### 6 Commands
 
-# Step 2: Install the plugin
-/plugin install ricardos-claude-code
-```
-
-## What's Inside
-
-### Python AI Commands
-
-- `/primer` - Prime Claude with project context using Serena semantic code retrieval
-- `/fix` - Auto-fix Python issues (ruff, black, mypy)
-- `/api` - FastAPI endpoint development with validation
-- `/lint` - Python linting and type checking
-- `/check` - Quality checks (tests, coverage, types)
+- `/primer` - Prime Claude with project context using semantic code retrieval
+- `/fix` - Auto-fix Python issues (ruff format, ruff check --fix, mypy)
+- `/api` - FastAPI endpoint scaffolding with Pydantic models
+- `/lint` - Python linting and type checking (ruff check, mypy)
+- `/check` - Comprehensive quality checks (pytest, coverage, mypy)
 - `/test` - Run pytest with appropriate options
 
-### Specialized AI Agents
+### 8 Specialized Agents
 
-**Code Quality & Review**
+**Code Quality & Review:**
+- **code-reviewer** - Comprehensive Python code review with security and performance analysis
+- **write-unit-tests** - Generate pytest unit tests with fixtures, mocking, and parametrization
+- **debug-test-failure** - Debug failing Python tests and identify root causes
+- **fix-pr-comments** - Systematically address PR review feedback
 
-- **code-reviewer** - Comprehensive Python code review with security analysis and performance optimization
-- **write-unit-tests** - Pytest test generation with good coverage
-- **debug-test-failure** - Python test debugging and fixes
-- **fix-pr-comments** - Systematically address PR feedback
+**Development & Architecture:**
+- **implement-feature** - Complete feature implementation with FastAPI, Pydantic, and testing
+- **add-agent-tool** - Add tools to AI agents following design patterns
+- **upgrade-dependency** - Python dependency management and migration handling
+- **optimize-db-query** - SQL/DuckDB query optimization for performance
 
-**Development & Architecture**
+### 8 Pattern Skills
 
-- **implement-feature** - Python feature implementation with FastAPI/Strands patterns
-- **add-agent-tool** - Add tools to AI agents following best design patterns
-- **upgrade-dependency** - Python dependency management and migrations
-- **optimize-db-query** - SQL/DuckDB query optimization
-- **deep-research-agent** - In-depth research and analysis
-- **technical-writer** - Technical documentation and writing
-
-### Python Pattern Skills
-
-Reusable patterns for consistent code quality:
-
+Reusable patterns that automatically activate when relevant code is detected:
 - **dynaconf-config** - Configuration management patterns
-- **async-await-checker** - Async/await best practices
-- **structured-errors** - Error handling patterns
-- **pydantic-models** - Data validation patterns
-- **tool-design-pattern** - AI tool design guidelines
+- **async-await-checker** - Async/await best practices validation
+- **structured-errors** - Error handling and exception patterns
+- **pydantic-models** - Data validation model patterns
+- **tool-design-pattern** - AI agent tool design guidelines
 - **docstring-format** - Python documentation standards
-- **pii-redaction** - PII handling patterns
+- **pii-redaction** - PII handling and logging safety
 - **pytest-patterns** - Testing best practices
 
-### MCP Servers
+### Automated Hooks
 
-Pre-configured Model Context Protocol servers that work across all projects:
+**Pre-Tool-Use Hooks:**
+- Pre-commit quality gate (linting, type checking, tests)
 
-- **memory** - Persistent context across sessions
-- **serena** - Semantic code retrieval with symbol-level understanding (powers /primer)
-- **context7** - Up-to-date library documentation
-- **linear** - Issue tracking integration
-- **notion** - Documentation workspace integration
-
-**Note**: DuckDB servers are project-specific and must be configured in each project's `.mcp.json` with the correct database paths. See project-level configuration for examples.
-
-### Automated Quality Gates
-
-Smart automation with external hook scripts:
-
-**Pre-Commit Hooks:**
-
-- Code quality checks (linting, type checking) before commits
-- Test suite validation before commits
-- Dependency security scanning
-
-**Post-Edit Hooks:**
-
-- Auto-format Python files with black/ruff after edits
-- Auto-run pytest when test files are modified
-- Dependency sync when pyproject.toml changes
-
-All hooks support auto-approve permissions for streamlined workflow.
+**Post-Tool-Use Hooks:**
+- Auto-format Python files after editing
+- Auto-sync dependencies after pyproject.toml changes
+- Auto-run tests after test file modifications
 
 ## Installation
 
-### From GitHub (Recommended)
+### From GitHub Marketplace
 
 ```bash
-# Add marketplace
+# Add the marketplace
 /plugin marketplace add ricardoroche/ricardos-claude-code
 
-# Install plugin
+# Install the plugin
 /plugin install ricardos-claude-code
 ```
 
@@ -109,200 +74,159 @@ cd ricardos-claude-code
 /plugin install ricardos-claude-code
 ```
 
+## Quick Start
+
+After installation, the plugin is immediately available in your Python projects:
+
+```bash
+# Fix code quality issues
+/fix
+
+# Create a new FastAPI endpoint
+/api
+
+# Run comprehensive quality checks
+/check
+
+# Run tests
+/test
+```
+
+Agents activate automatically when relevant work is detected:
+- "Write unit tests for this function" → activates write-unit-tests agent
+- "Review this code" → activates code-reviewer agent
+- "Implement user authentication" → activates implement-feature agent
+
 ## Best For
 
 - Python AI engineers
+- Data engineering teams
 - FastAPI developers
-- Strands AI framework users
 - ML/AI application developers
+- Teams building LLM-powered applications
 - Full-stack Python engineers
-- Teams working with LLM-powered applications
-
-## Usage Examples
-
-### Fixing Code Issues
-
-```bash
-/fix
-# Automatically runs ruff, black, and mypy to fix common issues
-```
-
-### Creating an API Endpoint
-
-```bash
-/api
-# Claude will scaffold a complete FastAPI endpoint with Pydantic models, validation, and error handling
-```
-
-### Running Quality Checks
-
-```bash
-/check
-# Runs comprehensive quality checks: tests, coverage, type checking
-```
-
-### Generating Tests
-
-Just ask Claude:
-
-- "Write unit tests for this function"
-- "I need test coverage for this module"
-
-The write-unit-tests agent automatically activates and creates pytest-based tests following best practices.
-
-### Using Skills
-
-Skills are automatically referenced when Claude detects relevant patterns:
-
-```python
-# When working with config, dynaconf-config skill activates
-# When writing Pydantic models, pydantic-models skill guides the implementation
-# When handling errors, structured-errors skill ensures consistency
-```
-
-## Documentation Structure
-
-This plugin includes comprehensive documentation in the `/docs` directory:
-
-- **workflows/** - Development workflows and automation guides
-- **standards/** - Code quality standards and best practices
-- **examples/** - Example implementations and use cases
-
-See the [Documentation Index](docs/RESTRUCTURING_SUMMARY.md) for detailed information on commands, agents, skills, and MCP server configurations.
 
 ## Philosophy
 
-This setup emphasizes:
+This plugin emphasizes:
 
-- **Type Safety**: Full type hints with mypy validation
-- **Best Practices**: Modern Python patterns (async/await, Pydantic, pytest)
-- **Productivity**: Automated formatting, testing, and quality gates
-- **AI Engineering**: Patterns optimized for LLM-powered applications
-- **Code Quality**: Enforced through hooks and automated checks
-- **Consistency**: Skills ensure patterns are followed across the codebase
+- **Type Safety** - Full type hints with mypy validation
+- **Best Practices** - Modern Python patterns (async/await, Pydantic, pytest)
+- **Productivity** - Automated formatting, testing, and quality gates
+- **AI Engineering** - Patterns optimized for LLM-powered applications
+- **Code Quality** - Enforced through hooks and automated checks
+- **Consistency** - Skills ensure patterns are followed across the codebase
 
-## Requirements
+## Configuration
 
-- Claude Code 2.0.13+
-- Python 3.11+
-- Works with any Python project (optimized for FastAPI + Strands)
+### MCP Servers (Optional)
 
-## MCP Server Setup
+This plugin does not include MCP server configuration. Configure servers in your project's `.mcp.json` based on your needs.
 
-After installation, MCP servers are pre-configured in `.mcp.json`. The setup includes:
-
-**Core Servers** (no configuration needed):
-
-- **memory** - Persistent context storage
-- **serena** - Semantic code retrieval (powers /primer command)
+**Recommended servers for Python AI/data engineering:**
+- **memory** - Persistent context across sessions
 - **context7** - Up-to-date library documentation
+- **filesystem** - File operations
+- **duckdb** - Query databases
 
-**Integration Servers** (require authentication on first use):
+See [MCP Server Recommendations](docs/workflows/mcp-server-recommendations.md) for configuration examples.
 
-- **linear** - Linear issue tracking via SSE endpoint
-- **notion** - Notion workspace via OAuth
+### Project-Level Customization
 
-**Project-Specific Servers**:
+You can extend or override plugin behavior in your project's `.claude/` directory:
 
-- **DuckDB** servers (operational/analytics) must be configured in each project's `.mcp.json` with project-specific database paths
-- See your project's `.mcp.json` for examples of database configuration
+**Add project-specific commands:**
+```bash
+# Create command in your project
+touch .claude/commands/my-command.md
+```
 
-See [docs/workflows/mcp-servers.md](docs/workflows/mcp-servers.md) for detailed configuration instructions.
+**Add project-specific agents:**
+```bash
+# Create agent in your project
+touch .claude/agents/my-agent.md
+```
 
-## Configuration Hierarchy
-
-This plugin provides **universal Python patterns** that work across all projects. Project-specific configuration is managed separately:
-
-### Plugin Level (Universal)
-
-- **Location**: `~/dev/personal/ricardos-claude-code/`
-- **Purpose**: Generic Python development patterns, agents, commands
-- **What's Here**: Hooks, auto-approve for read-only tools, universal env vars
-- **Shared**: Not project-specific, works everywhere
-
-### Project Level (Team)
-
-- **Location**: `project/.claude/` (checked into git)
-- **Purpose**: Project-specific agents, commands, skills
-- **What's Here**: Project conventions, team workflows, service-specific config
-- **Shared**: Yes, with entire team
-
-### Personal Level (You)
-
-- **Location**: `project/.claude/*.local.*` (gitignored)
-- **Purpose**: Your personal dev preferences and permissions
-- **What's Here**: Auto-approve overrides, dev workflows, personal notes
-- **Shared**: No, personal only
-
-### Setting Up Personal Config
-
-Create personal configuration files in your project's `.claude/` directory:
-
-**`settings.local.json`** - Personal permission overrides:
-
+**Personal settings (gitignored):**
 ```json
+// .claude/settings.local.json
 {
   "permissions": {
     "allow": [
       "Bash(git checkout:*)",
-      "Bash(make test:*)",
-      "mcp__linear__list_issues"
+      "Bash(make test:*)"
     ]
   }
 }
 ```
 
-**`CLAUDE.local.md`** - Personal dev preferences:
+## Requirements
 
-```markdown
-# My Personal Dev Preferences
+- Claude Code 2.0.13+
+- Python 3.11+
+- Works with any Python project (optimized for FastAPI/AI projects)
 
-## Development Environment
+## Documentation
 
-- **Editor**: VS Code / Neovim
-- **Shell**: Fish / Zsh
-- **Workflows**: Always use make commands
-
-## Personal Notes
-
-- Project-specific reminders
-```
-
-These files are automatically gitignored and won't be shared with your team.
-
-### Validation
-
-Use the `/config-status` command (if available in your project) to see the complete merged configuration from all levels.
-
-## Customization
-
-You can customize at any level:
-
-**Plugin (Universal):**
-
-- Commands: Edit files in `~/dev/personal/ricardos-claude-code/.claude/commands/`
-- Agents: Edit files in `~/dev/personal/ricardos-claude-code/.claude/agents/`
-- Skills: Edit files in `~/dev/personal/ricardos-claude-code/.claude/skills/`
-- Hooks: Modify `~/dev/personal/ricardos-claude-code/.claude/settings.json`
-
-**Project (Team):**
-
-- Create project-specific agents in `project/.claude/agents/`
-- Create project-specific commands in `project/.claude/commands/`
-- Create project-specific skills in `project/.claude/skills/`
-
-**Personal (You):**
-
-- Add permissions in `project/.claude/settings.local.json`
-- Add preferences in `project/.claude/CLAUDE.local.md`
+See the `docs/` directory for detailed guides:
+- [Standards](docs/standards/) - Code quality standards and best practices
+- [Workflows](docs/workflows/) - Development workflows and automation guides
+- [Examples](docs/examples/) - Example implementations and use cases
 
 ## Contributing
 
-Feel free to:
+This is a plugin repository. Contributions should focus on improving commands, agents, skills, and hooks that benefit Python AI/data engineering projects.
 
-- Fork and customize for your needs
-- Submit issues or suggestions
-- Share your improvements
+### Development Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/ricardoroche/ricardos-claude-code.git
+cd ricardos-claude-code
+
+# Install as local plugin for testing
+/plugin marketplace add /path/to/ricardos-claude-code
+/plugin install ricardos-claude-code
+
+# Make changes to commands, agents, or skills
+# Test in a Python project
+
+# Create pull request
+```
+
+### Adding a New Command
+
+1. Create command file: `.claude/commands/my-command.md`
+2. Add to `plugin.json` commands array
+3. Test in a Python project
+4. Document in README.md
+5. Submit pull request
+
+### Adding a New Agent
+
+1. Create agent file: `.claude/agents/my-agent.md`
+2. Add to `plugin.json` agents array
+3. Test activation and behavior
+4. Document in README.md
+5. Submit pull request
+
+### Adding a New Skill
+
+1. Create skill file: `.claude/skills/my-skill.md`
+2. Add to `plugin.json` skills array
+3. Test automatic activation
+4. Document pattern and usage
+5. Submit pull request
+
+### Guidelines
+
+- Commands should be general-purpose for Python projects
+- Agents should solve common Python development tasks
+- Skills should encode reusable patterns
+- No project-specific configuration
+- No MCP server configuration
+- Examples should be generic
+- Documentation should be clear and comprehensive
 
 ## License
 
@@ -314,4 +238,4 @@ Created by Ricardo Roche
 
 ---
 
-**Note**: This is my personal setup refined for Python AI engineering. Commands and patterns are optimized for FastAPI + Strands workflows but work great with any modern Python stack.
+**Note**: This is a Claude Code plugin, not a project template. Install it in your Python projects to get productive development tools and AI assistance.

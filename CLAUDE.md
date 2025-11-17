@@ -17,445 +17,103 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 <!-- OPENSPEC:END -->
 
-# CLAUDE.md
-
-This file provides comprehensive guidance to Claude Code when working in Ricardo's Python AI Engineering environment. This setup is optimized for building modern Python applications with FastAPI, AI agents, and best practices.
-
-## Overview
-
-This is a **Python AI Engineering development environment** designed for productive development of AI-powered applications, APIs, and intelligent systems. The setup emphasizes type safety, modern async patterns, comprehensive testing, and code quality automation.
-
-**Key Philosophy:**
-
-- Type-safe Python with full mypy validation
-- Modern async/await patterns throughout
-- Pydantic for all data validation
-- Comprehensive pytest testing
-- Automated code quality gates
-- AI-first tool design patterns
-
-## Architecture
-
-**Development Environment Structure:**
-
-```
-project/
-├── src/                           # Source code
-│   ├── api/                       # FastAPI routes and endpoints
-│   │   ├── v1/                    # API version 1
-│   │   │   ├── routes/            # Route handlers
-│   │   │   ├── models/            # Request/response models
-│   │   │   └── dependencies.py    # FastAPI dependencies
-│   │   └── middleware.py          # API middleware
-│   ├── core/                      # Core application logic
-│   │   ├── config.py              # Configuration (dynaconf)
-│   │   ├── logging.py             # Logging setup
-│   │   ├── errors.py              # Custom exceptions
-│   │   └── security.py            # Security utilities
-│   ├── agents/                    # AI agent implementations
-│   │   ├── base.py                # Base agent class
-│   │   ├── tools/                 # Agent tools
-│   │   └── prompts/               # Prompt templates
-│   ├── services/                  # Business logic services
-│   │   ├── external/              # External API integrations
-│   │   └── internal/              # Internal services
-│   ├── models/                    # Pydantic data models
-│   │   ├── domain/                # Domain models
-│   │   └── api/                   # API models
-│   └── database/                  # Database layer
-│       ├── repositories/          # Data access patterns
-│       └── migrations/            # Database migrations
-├── tests/                         # Test suite
-│   ├── unit/                      # Unit tests
-│   ├── integration/               # Integration tests
-│   └── conftest.py                # Pytest fixtures
-├── docs/                          # Documentation (NEW)
-│   ├── standards/                 # Coding standards
-│   ├── workflows/                 # Development workflows
-│   └── examples/                  # Code examples
-├── data/                          # Local data storage
-│   ├── operational.db             # Operational DuckDB
-│   └── analytics.db               # Analytics DuckDB
-├── pyproject.toml                 # Project dependencies
-├── settings.toml                  # Dynaconf configuration
-└── .env                           # Environment variables
-```
+# Claude Code Plugin for Python AI/Data Engineering
 
-## Quick Start
-
-### Prerequisites
+This plugin provides comprehensive tools for productive Python development with AI assistance. It includes commands, specialized agents, reusable skills, and automation hooks optimized for modern Python projects focusing on AI and data engineering.
 
-```bash
-# Python 3.11+
-python --version
+## What This Plugin Provides
 
-# uv (recommended) or pip
-curl -LsSf https://astral.sh/uv/install.sh | sh
+### Commands (6)
 
-# Optional: DuckDB CLI
-brew install duckdb # macOS
-```
-
-### Initial Setup
+- `/primer` - Prime Claude with project context using semantic code retrieval
+- `/fix` - Auto-fix Python issues (ruff format, ruff check --fix, mypy reporting)
+- `/api` - FastAPI endpoint development with Pydantic models and validation
+- `/lint` - Run Python linting and type checking (ruff check, mypy)
+- `/check` - Comprehensive quality checks (pytest, coverage, mypy)
+- `/test [path]` - Run pytest with appropriate options
 
-```bash
-# Install dependencies
-uv sync # With uv (fast)
-# or
-pip install -e . # With pip
+### Specialized Agents (8)
 
-# Run quality checks
-ruff check .
-mypy .
-pytest
+**Code Quality & Review:**
+- **code-reviewer** - Comprehensive Python code review with security and performance analysis
+- **write-unit-tests** - Generate pytest unit tests with fixtures, mocking, and parametrization
+- **debug-test-failure** - Debug failing Python tests and identify root causes
+- **fix-pr-comments** - Systematically address PR review feedback
 
-# Start development
-uvicorn src.api.main:app --reload
-```
+**Development & Architecture:**
+- **implement-feature** - Complete feature implementation with FastAPI, Pydantic, testing
+- **add-agent-tool** - Add tools to AI agents following design patterns
+- **upgrade-dependency** - Python dependency management and migration handling
+- **optimize-db-query** - SQL/DuckDB query optimization for performance
 
-## Available Commands
+### Pattern Skills (8)
 
-The environment provides 5 specialized slash commands for common Python development tasks:
+Reusable patterns that activate automatically when relevant code is detected:
+- **dynaconf-config** - Configuration management patterns
+- **async-await-checker** - Async/await best practices validation
+- **structured-errors** - Error handling and exception patterns
+- **pydantic-models** - Data validation model patterns
+- **tool-design-pattern** - AI agent tool design guidelines
+- **docstring-format** - Python documentation standards
+- **pii-redaction** - PII handling and logging safety
+- **pytest-patterns** - Testing best practices
 
-### /fix - Auto-fix Python Issues
+### Automated Hooks
 
-Automatically fixes linting, formatting, and reports type errors:
+**Pre-Tool-Use Hooks:**
+- Pre-commit quality gate (linting, type checking, tests before commits)
 
-```bash
-/fix
-```
+**Post-Tool-Use Hooks:**
+- Auto-format Python files after editing (ruff format, ruff check --fix)
+- Auto-sync dependencies after pyproject.toml changes (uv sync or pip install)
+- Auto-run tests after test file modifications
 
-**What it does:**
+## Python Development Guidelines
 
-1. Runs `ruff check --fix .` to auto-fix linting issues
-2. Runs `ruff format .` to format all Python code
-3. Runs `mypy .` to report type checking errors
+This plugin promotes modern Python best practices optimized for AI and data engineering projects.
 
-**Use when:**
+### Type Safety First
 
-- Before committing code
-- After writing new features
-- Cleaning up code quality issues
-- Preparing for PR review
-
-### /api - FastAPI Endpoint Development
-
-Creates complete FastAPI endpoints with Pydantic models, validation, error handling, and documentation:
-
-```bash
-/api
-```
-
-**Creates:**
-
-- FastAPI route handlers with proper decorators
-- Pydantic request/response models
-- Input validation with field constraints
-- Comprehensive error handling
-- OpenAPI documentation
-- Example requests/responses
-
-### /lint - Linting and Type Checking
-
-Runs comprehensive code quality checks:
-
-```bash
-/lint
-```
-
-**What it does:**
-
-1. `ruff check .` - Linting with modern rules
-2. `mypy .` - Type checking validation
-3. Reports all issues without auto-fixing
-
-### /check - Comprehensive Quality Checks
-
-Runs full test suite, coverage, and type checking:
-
-```bash
-/check
-```
-
-**What it does:**
-
-1. `pytest` - Run all tests
-2. `pytest --cov` - Coverage report
-3. `mypy .` - Type checking
-4. Reports test failures, coverage gaps, type errors
-
-### /test - Run Pytest
-
-Runs pytest with appropriate options:
-
-```bash
-/test                   # Run all tests
-/test tests/test_api.py # Run specific file
-/test --cov             # Run with coverage
-/test -v                # Run verbose
-/test -x                # Stop on first failure
-```
-
-## Specialized AI Agents
-
-The environment includes 8 specialized agents for different development tasks. Agents automatically activate when relevant work is detected.
-
-### Code Quality & Review Agents
-
-#### 1. code-reviewer
-
-**Purpose:** Comprehensive Python code review with best practices validation
-
-**Triggers:** When reviewing code, PRs, or requesting code quality feedback
-
-**What it reviews:**
-
-- Type hints coverage and correctness
-- Docstring completeness and format
-- Pydantic model design
-- Error handling patterns
-- Security issues (PII exposure, SQL injection, etc.)
-- Async/await correctness
-- Test coverage
-- Code organization and structure
-
-#### 2. write-unit-tests
-
-**Purpose:** Generate comprehensive pytest-based unit tests
-
-**Triggers:** When asked to write tests, improve coverage, or test new code
-
-**What it creates:**
-
-- Pytest test functions with descriptive names
-- Fixtures for common test data
-- Mocked external dependencies
-- Parametrized tests for multiple scenarios
-- Async test support with `pytest.mark.asyncio`
-- Assertion messages for clarity
-- Edge case and error scenario tests
-
-#### 3. debug-test-failure
-
-**Purpose:** Debug failing Python tests and identify root causes
-
-**Triggers:** When tests are failing or need debugging
-
-**What it does:**
-
-- Analyzes pytest output and tracebacks
-- Identifies assertion failures
-- Checks fixture issues
-- Verifies mock configurations
-- Debugs async test problems
-- Suggests fixes with code examples
-
-#### 4. fix-pr-comments
-
-**Purpose:** Systematically address PR review feedback
-
-**Triggers:** When working on PR comments or review feedback
-
-**What it does:**
-
-- Analyzes all PR comments
-- Creates implementation plan
-- Addresses each comment systematically
-- Ensures no comment is missed
-- Provides summary of changes made
-
-### Development & Architecture Agents
-
-#### 5. implement-feature
-
-**Purpose:** Complete feature implementation with FastAPI, Pydantic, testing, and documentation
-
-**Triggers:** When implementing new features, endpoints, or major functionality
-
-**What it implements:**
-
-- FastAPI endpoints with proper structure
-- Pydantic request/response models
-- Business logic services
-- Error handling and validation
-- Security measures (authentication, rate limiting)
-- Comprehensive tests
-- API documentation
-
-**Implementation pattern:**
-
-1. Defines Pydantic models with validation
-2. Implements business logic in service layer
-3. Creates FastAPI endpoint with proper decorators
-4. Adds configuration and error handling
-5. Writes comprehensive tests
-6. Updates documentation
-
-#### 6. add-agent-tool
-
-**Purpose:** Add tools to AI agents following best design patterns
-
-**Triggers:** When creating new agent tools or enhancing agent capabilities
-
-**What it creates:**
-
-- Pydantic input schemas with field descriptions
-- Tool function with `@tool` decorator
-- Comprehensive docstrings
-- Input validation
-- Structured JSON responses
-- Error handling with request IDs
-- Logging (with PII redaction)
-- Tool tests
-
-#### 7. upgrade-dependency
-
-**Purpose:** Python dependency management, upgrades, and migration handling
-
-**Triggers:** When upgrading packages, handling dependency conflicts, or migrating APIs
-
-**What it does:**
-
-- Analyzes current dependencies
-- Checks for breaking changes
-- Updates pyproject.toml
-- Fixes deprecated API usage
-- Updates type hints if needed
-- Runs tests to verify compatibility
-- Documents migration steps
-
-#### 8. optimize-db-query
-
-**Purpose:** SQL and DuckDB query optimization for performance
-
-**Triggers:** When working with database queries, performance issues, or analytics
-
-**What it optimizes:**
-
-- SQL query performance
-- Index recommendations
-- Query plan analysis
-- N+1 query problems
-- Batch operations
-- DuckDB-specific optimizations
-
-## Python Pattern Skills
-
-Skills are reusable patterns that automatically apply when relevant code is detected. The environment includes 8 comprehensive skills covering dynaconf configuration, async/await patterns, structured errors, Pydantic models, tool design, docstring format, PII redaction, and pytest patterns.
-
-For detailed documentation on each skill, see:
-
-- [Python Standards](docs/standards/python-standards.md)
-- [FastAPI Patterns](docs/standards/fastapi-patterns.md)
-- [Testing Guidelines](docs/standards/testing-guidelines.md)
-
-## MCP Server Integration
-
-The environment includes 6 pre-configured Model Context Protocol servers:
-
-### 1. memory - Persistent Context
-
-Store and retrieve context across Claude Code sessions
-
-**Use cases:** Project-specific patterns, architecture decisions, previous conversations
-
-### 2. context7 - Semantic Code Retrieval
-
-Semantic search across codebase for relevant context
-
-**Use cases:** Find similar code patterns, locate related implementations, discover existing utilities
-
-### 3. duckdb-operational - Operational Database
-
-Store and query operational data (user data, transactions, state)
-
-**Database:** `./data/operational.db`
-
-### 4. duckdb-analytics - Analytics Database
-
-Store and query analytics data (metrics, reports, aggregations)
-
-**Database:** `./data/analytics.db`
-
-### 5. linear - Issue Tracking
-
-Create and manage Linear issues for task tracking
-
-**Configuration:** Requires `LINEAR_API_KEY` environment variable
-
-### 6. notion - Documentation Workspace
-
-Access and update project documentation in Notion
-
-**Configuration:** Requires `NOTION_API_KEY` environment variable
-
-## Automated Hooks
-
-Smart automation that runs automatically based on file changes:
-
-### Pre-Tool-Use Hooks
-
-**Pre-Commit Quality Gate:**
-Runs before `git commit` to ensure code quality:
-
-```bash
-# Automatically runs:
-ruff check .   # Linting
-mypy .         # Type checking
-pytest --quiet # Tests
-```
-
-Purpose: Prevent committing code with linting errors, type errors, or test failures
-
-### Post-Tool-Use Hooks
-
-#### 1. Auto-Format Python Files
-
-**Triggers:** After editing or creating `.py` files
-**Actions:** Runs `ruff format` and `ruff check --fix`
-
-#### 2. Auto-Sync Dependencies
-
-**Triggers:** After editing `pyproject.toml`, `requirements.txt`, or `setup.py`
-**Actions:** Runs `uv sync` or `pip install`
-
-#### 3. Auto-Run Tests
-
-**Triggers:** After editing test files
-**Actions:** Runs `pytest` on the changed file
-
-## Core Development Patterns
-
-### Type Hints
-
-All code must include comprehensive type hints:
+All code should include comprehensive type hints:
 
 ```python
 from decimal import Decimal
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 
-def process_payment(
-    amount: Decimal, user_id: str, metadata: Optional[Dict[str, Any]] = None
-) -> PaymentResult:
+def process_transaction(
+    amount: Decimal,
+    user_id: str,
+    metadata: Optional[Dict[str, Any]] = None
+) -> TransactionResult:
+    """Process a transaction with validation."""
     pass
 
 
 class PaymentService:
+    """Service for handling payments."""
+
     api_key: str
     base_url: str
     timeout: int = 30
 
 
-async def fetch_user(user_id: str) -> User:
+async def fetch_user_data(user_id: str) -> UserData:
+    """Fetch user data asynchronously."""
     pass
 ```
 
-### Pydantic Models
+**Type Checking:**
+- Run mypy in strict mode
+- No `Any` types without justification
+- Type hints required on all public functions
+
+### Pydantic for Data Validation
+
+Use Pydantic models for all data validation and serialization:
 
 ```python
 from decimal import Decimal
-
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -463,147 +121,175 @@ class PaymentRequest(BaseModel):
     """Payment creation request."""
 
     amount: Decimal = Field(
-        ..., gt=0, decimal_places=2, description="Payment amount in USD"
+        ...,
+        gt=0,
+        decimal_places=2,
+        description="Payment amount"
     )
     currency: str = Field(default="USD", pattern="^[A-Z]{3}$")
 
     @field_validator("amount")
     @classmethod
     def validate_amount(cls, v: Decimal) -> Decimal:
+        """Validate amount is within acceptable range."""
         if v > Decimal("10000"):
             raise ValueError("Amount exceeds maximum")
         return v.quantize(Decimal("0.01"))
 
     class Config:
-        json_schema_extra = {"example": {"amount": "99.99", "currency": "USD"}}
-```
-
-### Error Handling
-
-```python
-# Define custom exceptions
-class PaymentError(Exception):
-    """Base payment error."""
-
-    pass
-
-
-class InsufficientFundsError(PaymentError):
-    """Payment declined due to insufficient funds."""
-
-    pass
-
-
-# Handle specific exceptions
-try:
-    result = await payment_service.charge(amount, payment_method)
-except InsufficientFundsError as e:
-    logger.warning(f"Payment declined: {e}")
-    raise HTTPException(
-        status_code=status.HTTP_402_PAYMENT_REQUIRED, detail="Insufficient funds"
-    )
+        json_schema_extra = {
+            "example": {
+                "amount": "99.99",
+                "currency": "USD"
+            }
+        }
 ```
 
 ### Async/Await Patterns
+
+Use async/await for all I/O operations:
 
 ```python
 import httpx
 
 
-# Correct: await async functions
 async def fetch_data(url: str) -> dict:
+    """Fetch data from external API."""
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
+        response.raise_for_status()
         return response.json()
 
 
-# Correct: async endpoint
-@app.get("/users")
-async def get_users() -> List[User]:
-    users = await db.fetch_all("SELECT * FROM users")
-    return users
+# Parallel async operations
+async def fetch_multiple(urls: list[str]) -> list[dict]:
+    """Fetch multiple URLs concurrently."""
+    async with httpx.AsyncClient() as client:
+        tasks = [client.get(url) for url in urls]
+        responses = await asyncio.gather(*tasks)
+        return [r.json() for r in responses]
+```
+
+### Error Handling
+
+Define specific exceptions and handle them appropriately:
+
+```python
+class ServiceError(Exception):
+    """Base service error."""
+    pass
+
+
+class RateLimitError(ServiceError):
+    """Rate limit exceeded."""
+    pass
+
+
+class ValidationError(ServiceError):
+    """Data validation failed."""
+    pass
+
+
+# Handle specific exceptions
+try:
+    result = await external_service.call()
+except RateLimitError as e:
+    logger.warning(f"Rate limited: {e}")
+    await asyncio.sleep(60)
+    result = await external_service.call()
+except ValidationError as e:
+    logger.error(f"Validation failed: {e}")
+    raise HTTPException(status_code=422, detail=str(e))
 ```
 
 ### FastAPI Endpoint Structure
 
-```python
-from fastapi import APIRouter, Depends, status
+When building APIs with FastAPI:
 
-router = APIRouter(prefix="/api/v1/payments", tags=["payments"])
+```python
+from fastapi import APIRouter, Depends, HTTPException, status
+
+router = APIRouter(prefix="/api/v1/users", tags=["users"])
 
 
 @router.post(
     "/",
-    response_model=PaymentResponse,
+    response_model=UserResponse,
     status_code=status.HTTP_201_CREATED,
-    summary="Create a payment",
+    summary="Create a new user"
 )
-async def create_payment(
-    payment: PaymentRequest,
+async def create_user(
+    user: UserCreate,
     current_user: User = Depends(get_current_user),
-    payment_service: PaymentService = Depends(),
-) -> PaymentResponse:
+    user_service: UserService = Depends()
+) -> UserResponse:
     """
-    Create a new payment.
+    Create a new user account.
 
-    - **amount**: Payment amount (max $10,000)
-    - **currency**: Three-letter currency code
+    - **email**: Valid email address
+    - **name**: User's full name
     """
-    return await payment_service.create_payment(payment, current_user.id)
+    try:
+        return await user_service.create(user)
+    except DuplicateEmailError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Email already registered"
+        )
 ```
 
-### Testing Patterns
+### Testing with pytest
+
+Write comprehensive tests with pytest:
 
 ```python
 from decimal import Decimal
 from unittest.mock import AsyncMock, patch
-
 import pytest
 
 
 @pytest.fixture
 def payment_service():
-    """Fixture providing payment service instance."""
+    """Provide payment service instance for testing."""
     return PaymentService(api_key="test_key")
 
 
 @pytest.mark.asyncio
 async def test_create_payment_success(payment_service):
     """Test successful payment creation."""
+    # Arrange
     with patch("httpx.AsyncClient") as mock_client:
         mock_response = AsyncMock()
         mock_response.json.return_value = {"id": "pay_123", "status": "succeeded"}
-        mock_client.return_value.__aenter__.return_value.post.return_value = (
-            mock_response
+        mock_client.return_value.__aenter__.return_value.post.return_value = mock_response
+
+        # Act
+        result = await payment_service.create_payment(
+            PaymentRequest(amount=Decimal("99.99"), currency="USD")
         )
 
-        result = await payment_service.create_payment(payment_request, "user_123")
-
+        # Assert
         assert result.payment_id == "pay_123"
         assert result.status == "succeeded"
 
 
-@pytest.mark.parametrize(
-    "amount,error",
-    [
-        (Decimal("0"), "Amount must be positive"),
-        (Decimal("-10"), "Amount must be positive"),
-        (Decimal("10001"), "Amount exceeds maximum"),
-    ],
-)
+@pytest.mark.parametrize("amount,error", [
+    (Decimal("0"), "Amount must be positive"),
+    (Decimal("-10"), "Amount must be positive"),
+    (Decimal("10001"), "Amount exceeds maximum"),
+])
 def test_payment_validation_errors(amount, error):
     """Test payment validation with invalid amounts."""
     with pytest.raises(ValidationError, match=error):
-        PaymentRequest(amount=amount, currency="USD", payment_method_id="pm_123")
+        PaymentRequest(amount=amount, currency="USD")
 ```
 
-### Security Patterns
+### Security Best Practices
 
+**Input Validation:**
 ```python
-# Input Validation
+from pydantic import EmailStr, field_validator
 import re
-
-from pydantic import field_validator
 
 
 class UserRegistration(BaseModel):
@@ -613,205 +299,296 @@ class UserRegistration(BaseModel):
     @field_validator("password")
     @classmethod
     def validate_password(cls, v: str) -> str:
+        """Ensure password meets security requirements."""
         if not re.search(r"[A-Z]", v):
             raise ValueError("Password must contain uppercase letter")
+        if not re.search(r"[0-9]", v):
+            raise ValueError("Password must contain number")
         return v
+```
+
+**PII Redaction:**
+```python
+import re
 
 
-# PII Redaction
 def redact_email(email: str) -> str:
-    """Redact email: user@example.com -> u***@example.com"""
+    """Redact email for logging: user@example.com -> u***@example.com"""
     user, domain = email.split("@", 1)
     return f"{user[0]}***@{domain}"
 
 
-logger.info(f"Processing payment for {redact_email(user_email)}")
+def redact_phone(phone: str) -> str:
+    """Redact phone for logging: +1234567890 -> +123***7890"""
+    return f"{phone[:4]}***{phone[-4:]}"
+
+
+# Use in logging
+logger.info(f"Processing request for {redact_email(user.email)}")
 ```
 
-## Detailed Documentation
+### Code Quality Standards
 
-For comprehensive guides and examples, see:
+**Formatting:**
+- Use ruff for linting and formatting (88 character line length)
+- Follow PEP 8 style guide
+- Import ordering: standard library → third party → local
 
-### Standards
+**Naming Conventions:**
+- `snake_case` for functions, variables, methods
+- `PascalCase` for classes, Pydantic models
+- `UPPER_CASE` for constants
+- Prefix private members with `_`
 
-- [Python Standards](docs/standards/python-standards.md) - Type hints, docstrings, error handling, code quality
-- [FastAPI Patterns](docs/standards/fastapi-patterns.md) - Endpoint structure, middleware, authentication, rate limiting
-- [Testing Guidelines](docs/standards/testing-guidelines.md) - Test organization, fixtures, coverage requirements
+**Docstrings:**
+```python
+def process_data(data: list[dict], validate: bool = True) -> ProcessedData:
+    """
+    Process raw data with optional validation.
 
-### Workflows
+    Args:
+        data: List of raw data dictionaries
+        validate: Whether to validate data (default: True)
 
-- [Feature Development](docs/workflows/feature-development.md) - Complete PRP workflow for implementing features
-- [Bug Fixing](docs/workflows/bug-fixing.md) - Debug and fix workflow with regression prevention
-- [Code Review](docs/workflows/code-review.md) - Code review checklist and common issues
-- [Agent Delegation](docs/workflows/agent-delegation.md) - Sub-agent delegation patterns and handoffs
+    Returns:
+        ProcessedData object containing cleaned and structured data
 
-### Examples
+    Raises:
+        ValidationError: If validation fails and validate=True
+        ProcessingError: If data processing fails
+    """
+    pass
+```
 
-- [API Endpoint Examples](docs/examples/api-endpoint-examples.md) - CRUD, payments, uploads, search, batch operations
-- [Pydantic Model Examples](docs/examples/pydantic-examples.md) - Validation, nested models, serialization
-- [Async/Await Examples](docs/examples/async-examples.md) - Parallel calls, timeouts, error handling, testing
+**Prohibited Patterns:**
+- No `Any` types without justification
+- No untyped function signatures
+- No manual validation (use Pydantic)
+- No sync code for I/O operations
+- No bare `except:` clauses
+- No emojis (unless explicitly requested)
 
-## Environment Variables
+## Command Usage
+
+### /fix - Auto-fix Issues
+
+Automatically fixes linting and formatting issues:
+```bash
+/fix
+```
+
+Runs:
+1. `ruff check --fix .` - Fix linting issues
+2. `ruff format .` - Format code
+3. `mypy .` - Report type errors
+
+Use before commits or when cleaning up code.
+
+### /api - Create FastAPI Endpoint
+
+Scaffolds a complete FastAPI endpoint:
+```bash
+/api
+```
+
+Creates:
+- Pydantic request/response models
+- FastAPI route handler with validation
+- Error handling
+- OpenAPI documentation
+- Example requests/responses
+
+### /check - Quality Gate
+
+Runs comprehensive quality checks:
+```bash
+/check
+```
+
+Runs:
+1. `pytest` - All tests
+2. `pytest --cov` - Coverage report
+3. `mypy .` - Type checking
+
+Use before creating commits or pull requests.
+
+### /test - Run Tests
+
+Runs pytest with options:
+```bash
+/test                    # All tests
+/test path/to/test.py    # Specific file
+/test -v                 # Verbose
+/test -x                 # Stop on first failure
+/test --cov              # With coverage
+```
+
+## Agent Usage
+
+Agents automatically activate when relevant work is detected, or you can request them explicitly.
+
+### Code Review Agent
+
+Request code review:
+```
+"Review this code for issues"
+"Check this PR for problems"
+```
+
+Reviews:
+- Type hints coverage
+- Security issues (PII, injection, etc.)
+- Performance problems
+- Error handling
+- Test coverage
+- Code organization
+
+### Write Tests Agent
+
+Request test generation:
+```
+"Write unit tests for this function"
+"I need test coverage for this module"
+```
+
+Creates:
+- pytest test functions
+- Fixtures for test data
+- Mocked dependencies
+- Parametrized tests
+- Async test support
+
+### Implement Feature Agent
+
+Request feature implementation:
+```
+"Implement user authentication feature"
+"Create payment processing endpoint"
+```
+
+Implements:
+- Pydantic models
+- Business logic services
+- API endpoints (if applicable)
+- Error handling
+- Tests
+- Documentation
+
+## Configuration
+
+### Project Structure
+
+This plugin works best with Python projects following this structure:
+
+```
+project/
+├── src/                    # Source code
+│   ├── api/               # API layer (FastAPI)
+│   ├── services/          # Business logic
+│   ├── models/            # Pydantic models
+│   └── database/          # Data access
+├── tests/                 # Test suite
+│   ├── unit/             # Unit tests
+│   └── integration/      # Integration tests
+├── pyproject.toml        # Dependencies
+└── .mcp.json             # MCP server configuration (project-specific)
+```
+
+### Environment Setup
+
+Example environment variables (adjust for your project):
 
 ```bash
 # Application
-ENV_FOR_DYNACONF=dev # Environment (dev, staging, production)
-PYTHONPATH=src:.     # Python path
-DEBUG=true           # Debug mode
+ENV_FOR_DYNACONF=dev       # Environment (dev, staging, prod)
+DEBUG=true                 # Debug mode
 
-# Database
-OPERATIONAL_DB_PATH=./data/operational.db
-ANALYTICS_DB_PATH=./data/analytics.db
-
-# External Services
-STRIPE_API_KEY=sk_test_...
-LINEAR_API_KEY=lin_api_...
-NOTION_API_KEY=secret_...
+# External Services (examples)
+EXTERNAL_API_KEY=xxx       # External service API key
+DATABASE_URL=xxx           # Database connection string
 
 # Logging
-LOG_LEVEL=INFO  # Logging level
-LOG_FORMAT=json # json or text
-
-# Testing
-PYTEST_TIMEOUT=30 # Test timeout seconds
+LOG_LEVEL=INFO             # Logging level
+LOG_FORMAT=json            # json or text
 ```
+
+### Quality Gates
+
+Pre-commit hooks ensure code quality:
+- Linting passes (ruff check)
+- Type checking passes (mypy)
+- Tests pass (pytest)
+
+All checks must pass before commits are allowed.
+
+## MCP Server Recommendations
+
+This plugin does not include MCP server configuration. Configure servers in your project's `.mcp.json` file based on your needs.
+
+**Recommended servers for Python AI/data engineering:**
+
+- **memory** - Persistent context across sessions
+- **context7** - Up-to-date library documentation
+- **filesystem** - File operations
+- **duckdb** - Query databases (configure with your database paths)
+
+See the [MCP Server Guide](docs/workflows/mcp-server-recommendations.md) for configuration examples.
 
 ## Best Practices Summary
 
 **Type Safety:**
-
 - All functions have type hints
 - Mypy runs in strict mode
-- No `Any` types without justification
+- No `Any` without justification
 
 **Code Quality:**
-
 - Ruff for linting and formatting
 - Pre-commit hooks enforce standards
-- All code passes /check before commit
+- 80%+ test coverage minimum
 
 **Testing:**
-
-- 80%+ test coverage minimum
 - Unit and integration tests
 - Mock external dependencies
 - Test success and error paths
-
-**Documentation:**
-
-- Docstrings on all public functions
-- Type hints for clarity
-- OpenAPI docs for all endpoints
-- README updated with features
+- Use pytest fixtures
 
 **Security:**
-
 - PII redacted in logs
 - Input validation with Pydantic
-- Authentication on protected endpoints
-- Rate limiting on public endpoints
+- Parameterized SQL queries
+- Rate limiting on public APIs
 
-**AI Patterns:**
-
-- Tools follow tool-design-pattern
-- Structured JSON responses
-- Request ID tracking
-- Comprehensive error handling
+**Async Patterns:**
+- Use async/await for I/O
+- Parallel operations with asyncio.gather
+- Proper exception handling
+- Timeout handling
 
 ## Common Workflows
 
-### Creating a New API Endpoint
+### Creating a New Feature
 
-```bash
-# 1. Use /api command
-/api
+1. Use `/primer` to understand codebase context
+2. Implement feature (agent can help)
+3. Write tests (write-unit-tests agent)
+4. Run `/check` to verify quality
+5. Commit changes
 
-# 2. Implement (models, service, route)
+### Fixing Code Quality
 
-# 3. Test
-pytest tests/integration/test_api.py -v
+1. Run `/check` to identify issues
+2. Run `/fix` to auto-fix what's possible
+3. Manually fix remaining issues
+4. Run `/check` again to verify
+5. Commit changes
 
-# 4. Quality check
-/check
+### Code Review
 
-# 5. Commit
-git add .
-git commit -m "Add payment history endpoint"
-```
-
-### Fixing Code Quality Issues
-
-```bash
-# 1. Run quality checks
-/check
-
-# 2. Auto-fix what's possible
-/fix
-
-# 3. Fix remaining issues manually
-
-# 4. Verify all checks pass
-/check
-
-# 5. Commit
-git add .
-git commit -m "Fix code quality issues"
-```
-
-### Implementing a Feature from Spec
-
-```bash
-# 1. Activate implement-feature agent
-"Implement user payment history API from spec"
-
-# 2. Agent implements (models, service, endpoint, tests, docs)
-
-# 3. Review and test
-pytest tests/ -v
-
-# 4. Quality check
-/check
-
-# 5. Commit
-git add .
-git commit -m "Implement payment history feature"
-```
-
-## Important Notes
-
-- **Always use type hints** - No untyped code allowed
-- **Pydantic for validation** - Never validate manually
-- **Async by default** - Use async/await for I/O operations
-- **Test everything** - Aim for 90%+ coverage
-- **Security first** - Always redact PII, validate inputs
-- **Quality gates** - Pre-commit hooks must pass
-- **Structured responses** - Use Pydantic models for API responses
-- **Error handling** - Specific exceptions with proper HTTP status codes
-
-## Getting Help
-
-**Commands:**
-
-- `/fix` - Auto-fix issues
-- `/check` - Verify quality
-- `/api` - Create endpoints
-- `/test` - Run tests
-- `/lint` - Check code
-
-**Agents:**
-
-- Ask for code review
-- Request feature implementation
-- Debug test failures
-- Add agent tools
-- Optimize queries
-
-**Documentation:**
-
-- See `docs/` directory for detailed guides
-- Each workflow has step-by-step instructions
-- Examples show practical implementations
+1. Request code-reviewer agent
+2. Address feedback
+3. Run `/check` to verify fixes
+4. Commit changes
 
 ---
 
-This setup is designed for maximum productivity in Python AI engineering. All commands, agents, and skills work together to maintain high code quality while moving fast.
+This plugin is designed for maximum productivity in Python AI and data engineering. All commands, agents, and skills work together to maintain high code quality while moving fast.

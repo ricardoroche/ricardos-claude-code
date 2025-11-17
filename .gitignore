@@ -70,6 +70,7 @@ data/*.duckdb
 # Local settings (users should not commit these)
 .claude/settings.local.json
 CLAUDE.local.md
+.mcp.json
 .mcp.local.json
 *.local.md
 
