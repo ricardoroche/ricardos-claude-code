@@ -4,15 +4,6 @@ A comprehensive Claude Code plugin providing commands, specialized agents, patte
 
 ## What's Included
 
-### 6 Commands
-
-- `/primer` - Prime Claude with project context using semantic code retrieval
-- `/fix` - Auto-fix Python issues (ruff format, ruff check --fix, mypy)
-- `/api` - FastAPI endpoint scaffolding with Pydantic models
-- `/lint` - Python linting and type checking (ruff check, mypy)
-- `/check` - Comprehensive quality checks (pytest, coverage, mypy)
-- `/test` - Run pytest with appropriate options
-
 ### 32 Specialized Agents
 
 All agents follow a unified **hybrid pattern** (role + workflows) for consistency and skill integration.
@@ -102,6 +93,15 @@ Reusable patterns that automatically activate from agent workflows:
 - **openspec-authoring** - OpenSpec metadata, ordering, and validation guidance
 - **spec-templates** - Reusable outlines for proposals, tasks, specs, ADRs, READMEs
 
+### 3 Commands (OpenSpec Workflow)
+
+Commands for structured change proposals and implementation:
+- `/openspec:proposal` - Scaffold new OpenSpec change with validation
+- `/openspec:apply` - Implement approved OpenSpec change with task tracking
+- `/openspec:archive` - Archive deployed change and update specs
+
+**Why only OpenSpec commands?** These provide unique workflow orchestration with external CLI integration, validation, and structured lifecycles. Common development tasks (linting, testing, API creation) are better served through natural language requests and automation hooks.
+
 ### Automated Hooks
 
 **Pre-Tool-Use Hooks:**
@@ -139,26 +139,71 @@ cd ricardos-claude-code
 
 ## Quick Start
 
-After installation, the plugin is immediately available in your Python projects:
+After installation, the plugin is immediately available in your Python projects. Simply ask Claude naturally:
 
+**Task Analysis:**
+```
+"Help me analyze this task: Add user authentication"
+"Break down implementing a recommendation system into steps"
+```
+→ Activates `requirements-analyst` or `ai-product-analyst` agents
+
+**API Development:**
+```
+"Create a FastAPI endpoint for user login with JWT tokens"
+"Add CRUD endpoints for the products resource"
+```
+→ Activates `implement-feature` agent with `fastapi-patterns` skill
+
+**Code Quality:**
+```
+"Fix the linting issues"
+"Check for type errors"
+"Run all quality checks before committing"
+```
+→ Claude runs appropriate tools (ruff, mypy, pytest) or relies on automation hooks
+
+**Testing:**
+```
+"Run the auth module tests"
+"Run the full test suite with coverage"
+```
+→ Claude runs pytest with appropriate flags, or tests auto-run when you edit test files
+
+**OpenSpec Workflows:**
 ```bash
-# Fix code quality issues
-/fix
-
-# Create a new FastAPI endpoint
-/api
-
-# Run comprehensive quality checks
-/check
-
-# Run tests
-/test
+/openspec:proposal   # Create structured change proposal
+/openspec:apply      # Implement approved change
+/openspec:archive    # Archive deployed change
 ```
 
-Agents activate automatically when relevant work is detected:
-- "Write unit tests for this function" → activates write-unit-tests agent
-- "Review this code" → activates code-reviewer agent
-- "Implement user authentication" → activates implement-feature agent
+### Automation in Action
+
+The plugin includes hooks that reduce manual commands:
+- **Auto-format**: Python files are automatically formatted when you edit them
+- **Auto-test**: Tests run automatically when you save test files
+- **Pre-commit gate**: Quality checks run automatically before git commits
+
+## Migrating from v1.x Commands
+
+**Previous version** (v1.x) had 6 Python tool commands that have been removed in favor of natural language and automation:
+
+| Old Command | New Approach |
+|------------|--------------|
+| `/new-task` | Ask naturally: "Help me analyze this task: [description]"<br>→ Activates `requirements-analyst` agent with deeper contextual analysis |
+| `/api` | Ask naturally: "Create a FastAPI endpoint for [feature]"<br>→ Activates `implement-feature` agent + `fastapi-patterns` skill |
+| `/fix` | **Auto-format on save** (PostToolUse hook)<br>OR ask: "Fix linting issues" |
+| `/lint` | Ask: "Check for linting errors" or "What are the type errors?" |
+| `/check` | **Pre-commit hook auto-runs**<br>OR ask: "Run all quality checks" |
+| `/test [path]` | **Auto-runs on test file save**<br>OR ask: "Run tests for [module]" |
+
+**Why the change?**
+- **More flexible**: Natural language allows variations ("run only integration tests")
+- **Better automation**: Hooks reduce need for manual commands
+- **Tool-agnostic**: Works with any linter/formatter, not just ruff/pytest
+- **Richer results**: Agents provide contextual analysis, not just templates
+
+**OpenSpec commands remain unchanged** - they provide unique workflow orchestration that complements agents.
 
 ## Best For
 

@@ -38,13 +38,21 @@ When working in Python projects using this plugin:
 This is a Claude Code plugin repository providing tools for Python development:
 
 **Structure:**
-- `.claude/commands/` - 6 slash commands for Python development tasks
+- `.claude/commands/openspec/` - 3 OpenSpec workflow commands (proposal, apply, archive)
 - `.claude/agents/` - 32 specialized agents following hybrid pattern (role + workflows)
 - `.claude/skills/` - 29 pattern skills for code quality, AI/LLM, and best practices
 - `.claude/settings.json` - Automation hooks for quality gates
 - `.claude/templates/` - Agent and skill templates for consistency
 - `docs/` - Comprehensive reference documentation and patterns
 - `README.md` - User-facing documentation, setup, and usage guides
+
+**Using the Plugin:**
+The plugin emphasizes natural language interaction over commands. Instead of memorizing commands:
+- Ask naturally: "Create a FastAPI endpoint for user registration" → Activates `implement-feature` agent
+- Ask naturally: "Help me analyze this task" → Activates `requirements-analyst` agent
+- Ask naturally: "Fix linting issues" → Claude runs appropriate tools
+- Rely on automation: Files auto-format on save, tests auto-run on test file changes
+- Use commands only for OpenSpec workflows that require structured orchestration
 
 **Hybrid Agent Pattern:**
 All agents follow a unified pattern combining role-based mindset with specific task workflows. Each agent explicitly references skills that are triggered by workflow language, creating a clear model: User Request → Agent Activation → Workflow Selection → Skill Auto-Triggering → Guided Implementation.
