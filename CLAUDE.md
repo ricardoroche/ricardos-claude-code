@@ -39,11 +39,15 @@ This is a Claude Code plugin repository providing tools for Python development:
 
 **Structure:**
 - `.claude/commands/` - 6 slash commands for Python development tasks
-- `.claude/agents/` - 8 specialized agents for complex workflows
-- `.claude/skills/` - 10 pattern skills for code quality and best practices
+- `.claude/agents/` - 32 specialized agents following hybrid pattern (role + workflows)
+- `.claude/skills/` - 29 pattern skills for code quality, AI/LLM, and best practices
 - `.claude/settings.json` - Automation hooks for quality gates
+- `.claude/templates/` - Agent and skill templates for consistency
 - `docs/` - Comprehensive reference documentation and patterns
 - `README.md` - User-facing documentation, setup, and usage guides
+
+**Hybrid Agent Pattern:**
+All agents follow a unified pattern combining role-based mindset with specific task workflows. Each agent explicitly references skills that are triggered by workflow language, creating a clear model: User Request → Agent Activation → Workflow Selection → Skill Auto-Triggering → Guided Implementation.
 
 **Commands, agents, and skills are self-documented** in their respective files. Refer to them for detailed usage.
 

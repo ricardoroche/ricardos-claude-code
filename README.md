@@ -13,31 +13,94 @@ A comprehensive Claude Code plugin providing commands, specialized agents, patte
 - `/check` - Comprehensive quality checks (pytest, coverage, mypy)
 - `/test` - Run pytest with appropriate options
 
-### 8 Specialized Agents
+### 32 Specialized Agents
 
-**Code Quality & Review:**
-- **code-reviewer** - Comprehensive Python code review with security and performance analysis
+All agents follow a unified **hybrid pattern** (role + workflows) for consistency and skill integration.
+
+**Architecture (5 agents):**
+- **ml-system-architect** - Design ML/AI system architecture with scalability and observability
+- **rag-architect** - Design RAG systems with chunking, retrieval, and reranking strategies
+- **system-architect** - High-level system design for Python/AI applications
+- **backend-architect** - Backend API and service architecture with FastAPI
+- **frontend-architect** - AI UI/UX design (Streamlit, Gradio, chat interfaces)
+
+**Implementation (7 agents):**
+- **llm-app-engineer** - Build LLM-powered applications with best practices
+- **agent-orchestrator-engineer** - Implement multi-agent systems and tool orchestration
+- **implement-feature** - Complete feature implementation with FastAPI, Pydantic, and testing
 - **write-unit-tests** - Generate pytest unit tests with fixtures, mocking, and parametrization
+- **add-agent-tool** - Add tools to AI agents following design patterns
+- **experiment-notebooker** - Design and structure Jupyter notebooks for ML experiments
+- **deep-research-agent** - Conduct comprehensive research with synthesis and presentation
+
+**Quality (8 agents):**
+- **code-reviewer** - Comprehensive Python code review with security and performance analysis
+- **evaluation-engineer** - Build LLM evaluation pipelines with metrics and A/B testing
+- **python-ml-refactoring-expert** - Refactor Python/ML code for maintainability and performance
+- **performance-and-cost-engineer-llm** - Optimize LLM applications for speed and cost
+- **security-and-privacy-engineer-ml** - Secure AI applications (prompt injection, PII, output filtering)
+- **performance-engineer** - Profile and optimize Python application performance
+- **refactoring-expert** - Refactor Python code following best practices
+- **security-engineer** - Security audits and vulnerability assessment
+
+**Operations (4 agents):**
+- **mlops-ai-engineer** - Deploy and monitor ML/AI systems in production
+- **optimize-db-query** - SQL/DuckDB query optimization for performance
+- **upgrade-dependency** - Python dependency management and migration handling
 - **debug-test-failure** - Debug failing Python tests and identify root causes
+
+**Analysis (4 agents):**
+- **ai-product-analyst** - Define AI product requirements and success metrics
+- **requirements-analyst** - Clarify requirements and acceptance criteria before implementation
+- **tech-stack-researcher** - Research and compare Python/AI technology stacks
+- **learning-guide** - Teach Python and AI/ML concepts with clear explanations
+
+**Communication (3 agents):**
+- **technical-ml-writer** - Write ML/AI technical documentation and tutorials
+- **technical-writer** - Create clear technical documentation and tutorials
+- **spec-writer** - OpenSpec-first doc authoring (proposals, design docs, ADRs, READMEs, changelogs)
 - **fix-pr-comments** - Systematically address PR review feedback
 
-**Development & Architecture:**
-- **implement-feature** - Complete feature implementation with FastAPI, Pydantic, and testing
-- **add-agent-tool** - Add tools to AI agents following design patterns
-- **upgrade-dependency** - Python dependency management and migration handling
-- **optimize-db-query** - SQL/DuckDB query optimization for performance
+### 29 Pattern Skills
 
-### 8 Pattern Skills
+Reusable patterns that automatically activate from agent workflows:
 
-Reusable patterns that automatically activate when relevant code is detected:
-- **dynaconf-config** - Configuration management patterns
+**Python Engineering (15 skills):**
+- **type-safety** - Comprehensive type hints and mypy validation
 - **async-await-checker** - Async/await best practices validation
-- **structured-errors** - Error handling and exception patterns
 - **pydantic-models** - Data validation model patterns
+- **fastapi-patterns** - FastAPI endpoint and router patterns
+- **pytest-patterns** - Testing best practices with fixtures and parametrize
+- **structured-errors** - Error handling and exception patterns
+- **docstring-format** - Google-style Python documentation standards
+- **dynaconf-config** - Configuration management with type casting
 - **tool-design-pattern** - AI agent tool design guidelines
-- **docstring-format** - Python documentation standards
 - **pii-redaction** - PII handling and logging safety
-- **pytest-patterns** - Testing best practices
+- **database-migrations** - Alembic migration patterns
+- **query-optimization** - Database query performance and indexing
+- **python-packaging** - pyproject.toml and distribution setup
+- **dependency-management** - uv/Poetry patterns and lock files
+- **code-review-framework** - Structured review checklist
+
+**AI/LLM (7 skills):**
+- **llm-app-architecture** - Async patterns, streaming, token management, retries
+- **agent-orchestration-patterns** - Multi-agent systems and tool schemas
+- **rag-design-patterns** - Vector DBs, chunking, embeddings, reranking
+- **prompting-patterns** - Prompt templates, few-shot examples, injection prevention
+- **evaluation-metrics** - LLM eval datasets, metrics, A/B testing
+- **model-selection** - Model comparison, provider selection, fallback patterns
+- **ai-security** - Prompt injection detection, PII redaction, output filtering
+
+**Observability (3 skills):**
+- **observability-logging** - Structured logging, OpenTelemetry, LLM metrics
+- **monitoring-alerting** - Metric instrumentation, alerts, SLO/SLI
+- **performance-profiling** - Python profiling tools (cProfile, py-spy, Scalene)
+
+**Developer Velocity (4 skills):**
+- **git-workflow-standards** - Conventional commits, branch naming, PR templates
+- **docs-style** - Repository voice, structure, and clarity checks
+- **openspec-authoring** - OpenSpec metadata, ordering, and validation guidance
+- **spec-templates** - Reusable outlines for proposals, tasks, specs, ADRs, READMEs
 
 ### Automated Hooks
 
