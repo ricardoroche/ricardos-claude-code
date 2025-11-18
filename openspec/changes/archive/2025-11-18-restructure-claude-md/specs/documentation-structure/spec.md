@@ -1,15 +1,15 @@
 # Documentation Structure
 
-## MODIFIED Requirements
+## ADDED Requirements
 
 ### Requirement: CLAUDE.md must contain only essential AI assistant instructions
 
-CLAUDE.md MUST contain only essential AI assistant instructions and minimal project context. Previously containing ~520 lines including command documentation, agent descriptions, extensive Python patterns, configuration guides, and user workflows, it is modified to contain ~40 lines with only:
+CLAUDE.md MUST contain only essential AI assistant instructions and minimal project context with:
 - OpenSpec instructions block (managed)
 - Minimal project context (~15 lines)
 - Essential AI behavior guidelines (~10 lines)
 
-This reduces context window usage from ~4,500 tokens to ~450 tokens (90% reduction), freeing context for actual code and conversations.
+This keeps context window usage minimal (~450 tokens), freeing context for actual code and conversations.
 
 #### Scenario: AI Assistant Loads CLAUDE.md Context
 
@@ -29,15 +29,15 @@ This reduces context window usage from ~4,500 tokens to ~450 tokens (90% reducti
 
 ### Requirement: README.md must contain all user-facing documentation
 
-README.md MUST contain all user-facing documentation. Previously containing basic plugin overview, installation, and philosophy but lacking detailed usage examples, it is modified to contain:
-- Plugin overview (existing)
-- Installation instructions (existing)
-- Quick start guide (existing)
-- Detailed command reference with usage examples (moved from CLAUDE.md)
-- Agent activation and usage guide (moved from CLAUDE.md)
-- Configuration and setup instructions (moved from CLAUDE.md)
-- MCP server recommendations (moved from CLAUDE.md)
-- Common workflows and how-tos (moved from CLAUDE.md)
+README.md MUST contain all user-facing documentation including:
+- Plugin overview
+- Installation instructions
+- Quick start guide
+- Detailed command reference with usage examples
+- Agent activation and usage guide
+- Configuration and setup instructions
+- MCP server recommendations
+- Common workflows and how-tos
 
 Users expect setup and usage documentation in README.md, not in AI context files.
 
@@ -61,14 +61,12 @@ Users expect setup and usage documentation in README.md, not in AI context files
 
 ### Requirement: Each skill file must document its own patterns with code examples
 
-Each skill file MUST document its own patterns, guidelines, and code examples. Previously containing minimal descriptions with detailed patterns in CLAUDE.md, each skill file is modified to contain:
+Each skill file MUST document its own patterns, guidelines, and code examples including:
 - Pattern description
 - When it applies (activation triggers)
 - Guidelines and rules
 - Code examples (good and bad patterns)
 - References to comprehensive docs
-
-Affected skills: `pydantic-models.md`, `pytest-patterns.md`, `async-await-checker.md`, `structured-errors.md`, `pii-redaction.md`, `docstring-format.md`.
 
 Skills should be self-documenting; patterns load only when relevant code is detected.
 
@@ -85,8 +83,6 @@ Skills should be self-documenting; patterns load only when relevant code is dete
 **And** it should not require referencing CLAUDE.md
 
 ---
-
-## ADDED Requirements
 
 ### Requirement: docs/ directory must contain comprehensive reference documentation
 
