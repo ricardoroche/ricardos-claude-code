@@ -1,0 +1,12 @@
+name: PR Discord Notify
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+jobs:
+  notify:
+    uses: ricardoroche/.github/.github/workflows/pr-discord-notify.yml@main
+    secrets:
+      DISCORD_PR_WEBHOOK_URL: ${{ secrets.DISCORD_PR_WEBHOOK_URL }}
+      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
